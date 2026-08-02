@@ -1,0 +1,758 @@
+﻿<!DOCTYPE html>
+
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>עמותות לחולי סרטן בישראל — לפי תחומי מענה</title>
+<style>
+  
+
+  :root {
+    --bg: #f7f5f2;
+    --surface: #ffffff;
+    --ink: #1c2129;
+    --ink-light: #4a5568;
+    --ink-muted: #8a97a8;
+    --teal: #2a7f7f;
+    --teal-light: #e6f4f4;
+    --teal-mid: #4aabab;
+    --warm: #c96b3a;
+    --warm-light: #fdf0e8;
+    --border: #e2e8ed;
+    --radius: 12px;
+    --shadow: 0 2px 16px rgba(0,0,0,0.07);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, 'Arial Hebrew', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  header {
+    background: linear-gradient(135deg, #1a6b4a, #2a8f6a 50%, #3bb88a 100%);
+    color: white;
+    padding: 48px 32px 40px;
+    text-align: center;
+  }
+
+  header h1 {
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+
+  header p {
+    font-size: 1rem;
+    opacity: 0.85;
+    font-weight: 300;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .notice {
+    background: var(--warm-light);
+    border-right: 4px solid var(--warm);
+    padding: 12px 20px;
+    font-size: 0.85rem;
+    color: var(--ink-light);
+    text-align: center;
+  }
+
+  .toc {
+    background: var(--surface);
+    padding: 28px 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .toc h2 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--ink-muted);
+    margin-bottom: 14px;
+  }
+
+  .toc-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .toc-chip {
+    background: var(--teal-light);
+    color: var(--teal);
+    padding: 5px 13px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid #c5e6e6;
+    transition: background 0.15s;
+    cursor: pointer;
+  }
+
+  .toc-chip:hover {
+    background: var(--teal-mid);
+    color: white;
+    border-color: transparent;
+  }
+
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+  }
+
+  .category {
+    margin-bottom: 40px;
+  }
+
+  .cat-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--teal-light);
+  }
+
+  .cat-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--teal-light);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .cat-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--teal);
+  }
+
+  .cat-count {
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    font-weight: 400;
+    margin-top: 1px;
+  }
+
+  .orgs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
+
+  .org-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    box-shadow: var(--shadow);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .org-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+  }
+
+  .org-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--ink);
+    margin-bottom: 5px;
+  }
+
+  .org-detail {
+    font-size: 0.82rem;
+    color: var(--ink-light);
+    line-height: 1.5;
+  }
+
+  .age-tag {
+    display: inline-block;
+    background: #f0f4f8;
+    border: 1px solid #d4dce5;
+    color: var(--ink-muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-top: 7px;
+  }
+
+  .free-tag {
+    display: inline-block;
+    background: #edfbf4;
+    border: 1px solid #b3e8cc;
+    color: #2f8c57;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-top: 7px;
+    margin-right: 4px;
+  }
+
+  .specific-tag {
+    display: inline-block;
+    background: #fff7ed;
+    border: 1px solid #fcd6a4;
+    color: #c25e12;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-top: 7px;
+    margin-right: 4px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 28px;
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 32px 20px 28px; }
+    header h1 { font-size: 1.6rem; }
+    .orgs-grid { grid-template-columns: 1fr; }
+    main { padding: 28px 16px 50px; }
+    .toc { padding: 20px 16px; }
+  }
+
+  .org-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+    background: var(--teal);
+    color: white;
+    padding: 5px 13px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.15s, opacity 0.15s;
+  }
+  .org-link:hover { opacity: 0.85; }
+  .org-link-mail {
+    background: #6b7c93;
+  }
+
+  .org-link-google {
+    background: #4a80d4;
+  }
+  .org-link-google:hover { opacity: 0.85; }
+</style>
+</head>
+<body>
+<header>
+<h1>עמותות לחולי סרטן — מבוגרים וכל הגילאים</h1>
+<p>רשימה מקיפה לפי תחומי מענה — אותה עמותה עשויה להופיע במספר קטגוריות</p>
+</header>
+<div class="notice">⚠️ המידע מבוסס על נתונים מעודכנים. מומלץ לאמת פרטים ישירות מול כל עמותה לפני פנייה.</div>
+<div class="toc">
+<h2>דלג לנושא</h2>
+<div class="toc-grid"><a class="toc-chip" href="#psy">💙 ליווי נפשי וקבוצות תמיכה</a><a class="toc-chip" href="#fin">💰 סיוע כלכלי</a><a class="toc-chip" href="#fun">🎉 ימי כיף ופעילויות</a><a class="toc-chip" href="#vac">🏕️ חופשות ומחנות נופש</a><a class="toc-chip" href="#housing">🏠 דיור ואירוח</a><a class="toc-chip" href="#transport">🚗 הסעות לטיפולים</a><a class="toc-chip" href="#appearance">💇 פאות ומראה חיצוני</a><a class="toc-chip" href="#rehab">🏃 פעילות גופנית ושיקום</a><a class="toc-chip" href="#info">📋 מידע, זכויות וייעוץ</a><a class="toc-chip" href="#hotline">📞 קווי סיוע וליווי</a><a class="toc-chip" href="#family">👨‍👩‍👧 תמיכה לבני משפחה</a><a class="toc-chip" href="#endlife">🕊️ טיפול תומך והוספיס</a><a class="toc-chip" href="#specific">🎗️ סרטן ספציפי</a><a class="toc-chip" href="#research">🔬 מחקר ופיתוח</a></div>
+</div>
+<main>
+<!-- 1. ליווי נפשי -->
+<section class="category" id="psy">
+<div class="cat-header">
+<div class="cat-icon">💙</div>
+<div>
+<div class="cat-title">ליווי נפשי, קבוצות תמיכה ותמיכה רגשית</div>
+<div class="cat-count">12 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">האגודה למלחמה בסרטן — "חזקים ביחד"</div>
+<div class="org-detail">מרכזי תמיכה בגבעתיים, ירושלים, עפולה, באר שבע וחיפה. קבוצות תמיכה לחולים, לבני זוג, לזוגות, לצעירים (20–30). הנחיית פסיכולוגים קליניים ועובדים סוציאליים.</div>
+<span class="free-tag">ללא תשלום</span>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.cancer.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">בית נתן — מרכז תמיכה ירושלים</div>
+<div class="org-detail">קבוצות תמיכה לנשים שאובחנו לאחרונה, לנשים בטיפולים, לחולות עם גרורות, ולזוגות. 10 מפגשים שבועיים בכל קבוצה.</div>
+<span class="age-tag">נשים בוגרות</span>
+<a class="org-link" href="https://www.beitnatan.com/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">אחת מתשע</div>
+<div class="org-detail">קבוצות תמיכה לנשים מחלימות, לדוברות רוסית, לזוגות ולנשים פנויות. הנחיית פסיכולוגים, עובדות סוציאליות, ריפוי באומנות וביבליותרפיה.</div>
+<span class="specific-tag">סרטן השד</span>
+<span class="age-tag">נשים</span>
+<a class="org-link" href="https://www.onein9.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">הדדי — המרכז למתמודדת עם סרטן השד</div>
+<div class="org-detail">בית פתוח בירושלים לנשים חולות וגם לבני זוגן, ילדיהן ובני משפחה נוספים. תמיכה נפשית וחברתית, מענה לצרכים רגשיים.</div>
+<span class="specific-tag">סרטן השד</span>
+<span class="free-tag">ללא מטרות רווח</span>
+<a class="org-link org-link-google" href="https://www.google.com/search?q=%D7%94%D7%93%D7%93%D7%99%20%D7%9E%D7%A8%D7%9B%D7%96%20%D7%A1%D7%A8%D7%98%D7%9F%20%D7%A9%D7%93%20%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D" rel="noopener noreferrer" target="_blank">🔍 חפש בגוגל</a></div>
+<div class="org-card">
+<div class="org-name">גישה לחיים</div>
+<div class="org-detail">תוכניות, סדנאות ושירותי תמיכה והנחייה למתמודדים עם חולי ואובדן. פועל בירושלים, השרון, זכרון יעקב וצפון. לחולים ולבני משפחותיהם.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link org-link-google" href="https://www.google.com/search?q=%D7%92%D7%99%D7%A9%D7%94%20%D7%9C%D7%97%D7%99%D7%99%D7%9D%20%D7%90%D7%A8%D7%92%D7%95%D7%9F%20%D7%97%D7%95%D7%9C%D7%99%20%D7%A1%D7%A8%D7%98%D7%9F%20%D7%99%D7%A9%D7%A8%D7%90%D7%9C" rel="noopener noreferrer" target="_blank">🔍 חפש בגוגל</a></div>
+<div class="org-card">
+<div class="org-name">עזר מציון — בית אורנית</div>
+<div class="org-detail">טיפולים רגשיים ותמיכה משפחתית כחלק מהמעטפת ההוליסטית לחולי סרטן.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.ami.org.il/communities/cancer-patients" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">יד תמר</div>
+<div class="org-detail">מעטפת הוליסטית שלמה לחולי סרטן ומשפחותיהם. תמיכה, מידע, כלים לניהול התקופה הקשה.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://yadtamar.org.il/he/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">בית אידי מעגן — באר שבע</div>
+<div class="org-detail">מרכז תמיכה קהילתי לחולי סרטן ומשפחותיהם באזור הדרום. תמיכה רגשית, קבוצות תמיכה, פעילויות פנאי. בשיתוף עיריית ב"ש, האגודה ואוניברסיטת בן גוריון.</div>
+<span class="free-tag">ללא תשלום</span>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.facebook.com/edyshome" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">תכנית שחר</div>
+<div class="org-detail">שבעה ימי תמיכה והעצמה מרוכזים בהרי ירושלים למחלימים מסרטן. סדנאות בריאות ונפש, תכניות ייחודיות למחלימים צעירים (25–35).</div>
+<span class="age-tag">מחלימים</span>
+<a class="org-link org-link-google" href="https://www.google.com/search?q=%D7%AA%D7%9B%D7%A0%D7%99%D7%AA%20%D7%A9%D7%97%D7%A8%20%D7%9E%D7%97%D7%9C%D7%99%D7%9E%D7%99%20%D7%A1%D7%A8%D7%98%D7%9F%20%D7%99%D7%A9%D7%A8%D7%90%D7%9C" rel="noopener noreferrer" target="_blank">🔍 חפש בגוגל</a></div>
+<div class="org-card">
+<div class="org-name">מרכז אדמא</div>
+<div class="org-detail">"חלונות" — סדנאות מגוונות לתמיכה והעצמה למתמודדים עם מחלות קשות ובני משפחותיהם. "מסע" — קורסים שבועיים. גם ליווי ותמיכה רגשית פרטנית וקבוצות תמיכה טיפוליות.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.google.com/search?q=מרכז+אדמא+חולי+סרטן+תמיכה" rel="noopener noreferrer" target="_blank">🔗 חפש בגוגל</a>
+</div><div class="org-card">
+<div class="org-name">תעצומות לפוגשים את הסרטן</div>
+<div class="org-detail">ליווי אישי אינטגרטיבי המשלב חמישה עוגנים: תודעה, תזונה, תנועה, תמיכה ותקווה. מפגש היכרות חד-פעמי, מעטפת של 4 מפגשים, וליווי חודשי של 8 מפגשים — עם מטפלים מקצועיים.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.google.com/search?q=תעצומות+עמותה+פוגשים+את+הסרטן" rel="noopener noreferrer" target="_blank">🔗 חפש בגוגל</a>
+</div><div class="org-card"><div class="org-name">זכרון מנחם — מבוגרים צעירים</div><div class="org-detail">מחנות נופש שנתיים ותמיכה ייעודית גם לבגירים צעירים בגילאי 20–30 המחלימים מסרטן. הארגון מלווה רצף 0–25, כולל בגירים שחלו בגיל צעיר.</div><span class="age-tag">20–30 מחלימים</span><a class="org-link" href="https://zichron.org/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div></div>
+</section>
+<!-- 2. סיוע כלכלי -->
+<section class="category" id="fin">
+<div class="cat-header">
+<div class="cat-icon">💰</div>
+<div>
+<div class="cat-title">סיוע כלכלי</div>
+<div class="cat-count">3 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">האגודה למלחמה בסרטן — קרן סיוע</div>
+<div class="org-detail">סיוע כלכלי חד-פעמי מותאם אישית לפונים עם קושי פסיכו-סוציאלי ומצוקה כלכלית בשנה הראשונה מהאבחון. גם מימון טיפול רגשי פרטי לפי קריטריונים.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.cancer.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">אחת מתשע</div>
+<div class="org-detail">סיוע ברכישת תרופות מצילות חיים שאינן בסל. הכוונה לוועדה להחזר מע"מ ממשרד האוצר על תרופות יקרות.</div>
+<span class="specific-tag">סרטן השד</span>
+<a class="org-link" href="https://www.onein9.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">עמותת לימונדה ישראל</div>
+<div class="org-detail">סיוע כלכלי ייחודי לחולות סרטן שד הנמצאות במשבר כלכלי.</div>
+<span class="specific-tag">סרטן השד</span>
+<span class="age-tag">נשים</span>
+<a class="org-link org-link-google" href="https://www.google.com/search?q=%D7%A2%D7%9E%D7%95%D7%AA%D7%AA%20%D7%9C%D7%99%D7%9E%D7%95%D7%A0%D7%93%D7%94%20%D7%99%D7%A9%D7%A8%D7%90%D7%9C%20%D7%A1%D7%A8%D7%98%D7%9F%20%D7%A9%D7%93" rel="noopener noreferrer" target="_blank">🔍 חפש בגוגל</a></div>
+</div>
+</section>
+<!-- 3. חינוך -->
+<!-- 4. ימי כיף -->
+<section class="category" id="fun">
+<div class="cat-header">
+<div class="cat-icon">🎉</div>
+<div>
+<div class="cat-title">ימי כיף, פעילויות בידור ואירועים</div>
+<div class="cat-count">2 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">עמותת דובוני החלמה</div>
+<div class="org-detail">מעניקה חיבוקים מלאי אהבה דרך דובונים מיוחדים למטופלים, בהתבסס על מחקרים שהוכיחו את כוח החיבוק בשיפור תהליכי החלמה.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link org-link-google" href="https://www.google.com/search?q=%D7%A2%D7%9E%D7%95%D7%AA%D7%AA%20%D7%93%D7%95%D7%91%D7%95%D7%A0%D7%99%20%D7%94%D7%97%D7%9C%D7%9E%D7%94%20%D7%99%D7%A9%D7%A8%D7%90%D7%9C" rel="noopener noreferrer" target="_blank">🔍 חפש בגוגל</a></div>
+<div class="org-card">
+<div class="org-name">האגודה למלחמה בסרטן</div>
+<div class="org-detail">ימי עיון, אירועי רווחה, אירועי תמיכה וסדנאות "שמחת חיה" לבני נוער שאחד מהוריהם נפטר.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.cancer.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+</div>
+</section>
+<!-- 5. חופשות ונופש -->
+<section class="category" id="vac">
+<div class="cat-header">
+<div class="cat-icon">🏕️</div>
+<div>
+<div class="cat-title">חופשות, מחנות נופש ונסיעות</div>
+<div class="cat-count">2 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">בית נתן — "מרגוע"</div>
+<div class="org-detail">תיווך צימרים לזוגות ולמשפחות לחופשת שיקום — הזדמנות להתרענן ולהטעין מצברים בתקופה מתישה.</div>
+<span class="age-tag">מבוגרים</span>
+<a class="org-link" href="https://www.beitnatan.com/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">רפא נא — נופש מרפא</div>
+<div class="org-detail">נופש זוגי או משפחתי חינם של יום-יומיים בצימרים ומלונות שתרמו את מקומותיהם הפנויים. הוקמה 2014. הזכאות: מי שבטיפול אונקולוגי כיום, או שסיים טיפולים בשנה האחרונה. פועלת עם כל קופות החולים, ללא הבדל דת, מגדר או גיל.</div>
+<span class="free-tag">ללא תשלום</span><span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.refanah.org/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a>
+</div></div>
+</section>
+<!-- 6. דיור ואירוח -->
+<section class="category" id="housing">
+<div class="cat-header">
+<div class="cat-icon">🏠</div>
+<div>
+<div class="cat-title">דיור ואירוח ליד בית חולים</div>
+<div class="cat-count">2 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">עזר מציון — בית אורנית (פתח תקווה)</div>
+<div class="org-detail">מלונית לחולי סרטן ומשפחותיהם הנמצאים בטיפול. לינה, אוכל ופעילויות. ניקיון ברמה גבוהה לחולים עם מערכת חיסונית חלשה.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.ami.org.il/communities/cancer-patients" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">האגודה למלחמה בסרטן — המעון ע"ש צ'ארלס קלור</div>
+<div class="org-detail">אירוח בפנסיון מלא לחולי סרטן המטופלים במרכז רפואי ומתגוררים רחוק ממקום הטיפול.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.cancer.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+</div>
+</section>
+<!-- 7. הסעות -->
+<section class="category" id="transport">
+<div class="cat-header">
+<div class="cat-icon">🚗</div>
+<div>
+<div class="cat-title">הסעות לטיפולים ולוגיסטיקה</div>
+<div class="cat-count">4 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">עזר מציון</div>
+<div class="org-detail">נסיעות נוחות לטיפולים כחלק ממעטפת הסיוע לחולי סרטן.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.ami.org.il/communities/cancer-patients" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">בית נתן — ליווי לטיפול יום</div>
+<div class="org-detail">מתנדבות מלוות חולות לטיפולי יום בבית חולים שערי צדק, מקלות על בדידות, מתח ושעמום בשעות הטיפול.</div>
+<span class="age-tag">נשים</span>
+<a class="org-link" href="https://www.beitnatan.com/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">האגודה למלחמה בסרטן</div>
+<div class="org-detail">ייעוץ זכויות להורים לילדים חולים: קידום תווי רכב נכה ועזרה בנגישות טיפולים.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.cancer.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">דרכי מרים</div>
+<div class="org-detail">הסעת חולי סרטן באזור ירושלים מביתם לבית החולים וחזרה — בהתנדבות.</div>
+<span class="free-tag">ללא תשלום</span><span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.google.com/search?q=דרכי+מרים+הסעות+חולי+סרטן+ירושלים" rel="noopener noreferrer" target="_blank">🔗 חפש בגוגל</a>
+</div></div>
+</section>
+<!-- 8. פאות וטיפוח -->
+<section class="category" id="appearance">
+<div class="cat-header">
+<div class="cat-icon">💇</div>
+<div>
+<div class="cat-title">פאות, מראה חיצוני וטיפוח</div>
+<div class="cat-count">4 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">עמותת פל"א — פאה לכל אישה</div>
+<div class="org-detail">פאות בחינם לחולות סרטן. הכוונה, ייעוץ, התאמה וטיפול שוטף. סניפים ובתי חולים ברחבי הארץ. כולל מספרות התנדבותיות.</div>
+<span class="free-tag">ללא תשלום</span>
+<span class="age-tag">נשים</span>
+<a class="org-link org-link-google" href="https://www.google.com/search?q=%D7%A2%D7%9E%D7%95%D7%AA%D7%AA%20%D7%A4%D7%9C%D7%90%20%D7%A4%D7%90%D7%94%20%D7%9C%D7%9B%D7%9C%20%D7%90%D7%99%D7%A9%D7%94%20%D7%97%D7%95%D7%9C%D7%95%D7%AA%20%D7%A1%D7%A8%D7%98%D7%9F" rel="noopener noreferrer" target="_blank">🔍 חפש בגוגל</a></div>
+<div class="org-card">
+<div class="org-name">האגודה למלחמה בסרטן — "להיראות טוב, להרגיש טוב יותר"</div>
+<div class="org-detail">קוסמטיקאיות, מאפרות, פאניות וספרים מטפלים בהתנדבות בחולי סרטן במכונים האונקולוגיים, בסניפים, בקהילה ובהוספיס. גם השאלת פאות.</div>
+<span class="free-tag">ללא תשלום</span>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.cancer.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">הדדי</div>
+<div class="org-detail">השאלה ורכישה של פאות במרכז בירושלים, לצד שירותי תמיכה נוספים.</div>
+<span class="specific-tag">סרטן השד</span>
+<a class="org-link org-link-google" href="https://www.google.com/search?q=%D7%94%D7%93%D7%93%D7%99%20%D7%9E%D7%A8%D7%9B%D7%96%20%D7%A1%D7%A8%D7%98%D7%9F%20%D7%A9%D7%93%20%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D" rel="noopener noreferrer" target="_blank">🔍 חפש בגוגל</a></div>
+<div class="org-card">
+<div class="org-name">בית אידי מעגן</div>
+<div class="org-detail">שירות התאמת פאות לחולי סרטן באזור הדרום.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.facebook.com/edyshome" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+</div>
+</section>
+<!-- 9. שיקום גופני -->
+<section class="category" id="rehab">
+<div class="cat-header">
+<div class="cat-icon">🏃</div>
+<div>
+<div class="cat-title">פעילות גופנית, שיקום ובריאות הגוף</div>
+<div class="cat-count">3 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">האגודה למלחמה בסרטן — שיקום אונקולוגי</div>
+<div class="org-detail">תוכנית שיקום אונקולוגי, פעילות גופנית לחולי סרטן. גם שירות "חיים עם סטומה", ייעוץ תזונתי, ייעוץ בנושא מיניות ודימוי גוף.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.cancer.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">האגודה למלחמה בסרטן — מרכזי "חזקים ביחד"</div>
+<div class="org-detail">פעילויות גוף-נפש ופנאי: יוגה, צ'י קונג, פלדנקרייז ועוד — בסניפים ברחבי הארץ.</div>
+<span class="free-tag">ללא תשלום</span>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.cancer.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">חלאסרטן — חוזרים לעבודה</div>
+<div class="org-detail">תכנית שיקום תעסוקתי לצעירים מחלימים: בשיתוף מכללת גל וביטוח לאומי — מפגשים, סדנאות, התנסויות, חשיפה לתחומי תוכן ודיגיטל ("חלאסטק"), סטיילינג וצילומי פרופיל לחזרה לשוק העבודה.</div>
+<span class="age-tag">צעירים מחלימים</span>
+<a class="org-link" href="https://www.stop-cancer.co.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר חלאסרטן</a>
+</div></div>
+</section>
+<!-- 10. מידע וזכויות -->
+<section class="category" id="info">
+<div class="cat-header">
+<div class="cat-icon">📋</div>
+<div>
+<div class="cat-title">מידע, זכויות, ייעוץ משפטי ומס</div>
+<div class="cat-count">8 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">האגודה למלחמה בסרטן — ייעוץ זכויות</div>
+<div class="org-detail">ייעוץ משפטי (בהתנדבות) בענייני מס הנובעים מהמחלה. הכוונה לוועדות רפואיות בביטוח הלאומי ולקרנות סיוע. מידע שיטתי על זכויות.</div>
+<span class="free-tag">ללא תשלום</span>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.cancer.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">בית אידי מעגן</div>
+<div class="org-detail">שירות סוציאלי: מידע על זכויות, דרכי מיצוין, כלים להתמודדות לחולי סרטן ומשפחותיהם בדרום.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.facebook.com/edyshome" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">יד תמר</div>
+<div class="org-detail">סיוע במיצוי זכויות לחולי סרטן ולמשפחותיהם. מידע, כלים ורשת בטחון לניהול התקופה.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://yadtamar.org.il/he/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">האגודה לזכויות החולה בישראל</div>
+<div class="org-detail">ייצוג חולים ופניות בנושאי זכויות רפואיות. מאגר עמותות ושירותים לחולי סרטן.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.patients-rights.org/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">מיזם אולקן — All Can</div>
+<div class="org-detail">גוף-גג המאגד את כלל עמותות חולי הסרטן בישראל. מפעיל שירות "All Can" לסיוע בהסעות, שינוי מועד תור, שינוי מקום טיפול ותיאום טיפולים. ערך סקר ל-162,000 מחלימים (2025).</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.google.com/search?q=מיזם+אולקן+ישראל+עמותות+סרטן" rel="noopener noreferrer" target="_blank">🔗 חפש בגוגל</a>
+</div><div class="org-card">
+<div class="org-name">ידי אור</div>
+<div class="org-detail">מנגישה מגוון טיפולי רפואה משלימה וטיפולים רגשיים לחולים במחלות קשות ומרותקי בית — כולל חולי סרטן. שירות ארצי.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.google.com/search?q=עמותת+ידי+אור+רפואה+משלימה+חולים" rel="noopener noreferrer" target="_blank">🔗 חפש בגוגל</a>
+</div><div class="org-card">
+<div class="org-name">הרב פירר — עזרא למרפא</div>
+<div class="org-detail">ייעוץ רפואי אישי ומקצועי חינם: ניתוח המסמכים הרפואיים ופנייה לבכירי הרופאים בארץ ובחו"ל. גם: הסעות אמבולנס, השאלת ציוד רפואי, הטסת חולים, יבוא תרופות נדירות, ו"קיץ של חיוכים" — ימי קיץ לחולי סרטן. פועלת מ-1979. חתן פרס ישראל.</div>
+<div class="org-detail" style="margin-top:6px;font-size:0.8rem;color:var(--ink-muted)">📞 03-5777001 (א׳–ה׳ 9:30–10:00)</div><span class="free-tag">ללא תשלום</span><span class="age-tag">כל הגילאים</span><a class="org-link" href="https://www.ezra-lemarpe.org/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a>
+</div><div class="org-card">
+<div class="org-name">הרב פישר — מגן לחולה</div>
+<div class="org-detail">ייעוץ רפואי חינם מהרב בנימין פישר, מוותיקי היועצים הרפואיים בישראל. קיצור זמני המתנה לבדיקות, הכוונה לרופאים המתאימים, השאלת ציוד רפואי, שינוע חולים לטיפולים, הטסת חולים לחו"ל. פועלת מ-1994.</div>
+<div class="org-detail" style="margin-top:6px;font-size:0.8rem;color:var(--ink-muted)">📞 WhatsApp: 02-644-2000</div><span class="free-tag">ללא תשלום</span><span class="age-tag">כל הגילאים</span><a class="org-link" href="https://magen.org/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a>
+</div></div>
+</section>
+<!-- 11. קווי סיוע -->
+<section class="category" id="hotline">
+<div class="cat-header">
+<div class="cat-icon">📞</div>
+<div>
+<div class="cat-title">קווי סיוע, ייעוץ טלפוני ולוויי מתנדבות</div>
+<div class="cat-count">4 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">האגודה למלחמה בסרטן — קו מידע</div>
+<div class="org-detail">קו מידע ותמיכה טלפוני לכל חולה בכל סוג סרטן, לבני משפחה ולמקורבים. מוסמך ומקצועי.</div>
+<span class="free-tag">ללא תשלום</span>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.cancer.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">אחת מתשע — קו חם</div>
+<div class="org-detail">התייעצות ותמיכה לחולות סרטן השד וקרוביהן. מוסמך מדי יום על-ידי מתנדבות שהחלימו מסרטן שד.</div>
+<span class="specific-tag">סרטן השד</span>
+<span class="age-tag">נשים</span>
+<a class="org-link" href="https://www.onein9.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">אחת מתשע — "לצדך"</div>
+<div class="org-detail">ליווי אישי פנים-אל-פנים: מפגשים אישיים בין חולת סרטן למתנדבת מחלימה שעברה הכשרה.</div>
+<span class="specific-tag">סרטן השד</span>
+<a class="org-link" href="https://www.onein9.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">האגודה למלחמה בסרטן — ליווי חולות שד</div>
+<div class="org-detail">מתנדבות שהתמודדו עם סרטן שד מלוות מתמודדות חדשות. מותאמות בגיל, סוג טיפול ושפה. גם ליווי לצד חולות גרורתיות.</div>
+<span class="specific-tag">סרטן השד</span>
+<a class="org-link" href="https://www.cancer.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+</div>
+</section>
+<!-- 12. בני משפחה -->
+<section class="category" id="family">
+<div class="cat-header">
+<div class="cat-icon">👨‍👩‍👧</div>
+<div>
+<div class="cat-title">תמיכה לבני משפחה ולמטפלים</div>
+<div class="cat-count">6 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">האגודה למלחמה בסרטן</div>
+<div class="org-detail">קבוצות תמיכה לבני זוג, לזוגות, לבני משפחה מלווים. הדרכת הורים לילדים חולים. "שמחת חיה" לבני נוער שאיבדו הורה לסרטן.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.cancer.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">הדדי</div>
+<div class="org-detail">קבוצות תמיכה לבני זוג של חולות שד, לילדי החולות ולבני משפחה נוספים.</div>
+<span class="specific-tag">משפחות חולות שד</span>
+<a class="org-link org-link-google" href="https://www.google.com/search?q=%D7%94%D7%93%D7%93%D7%99%20%D7%9E%D7%A8%D7%9B%D7%96%20%D7%A1%D7%A8%D7%98%D7%9F%20%D7%A9%D7%93%20%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D" rel="noopener noreferrer" target="_blank">🔍 חפש בגוגל</a></div>
+<div class="org-card">
+<div class="org-name">גישה לחיים</div>
+<div class="org-detail">שירותי תמיכה לחולים ולבני משפחותיהם במצבי חולי ואובדן.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link org-link-google" href="https://www.google.com/search?q=%D7%92%D7%99%D7%A9%D7%94%20%D7%9C%D7%97%D7%99%D7%99%D7%9D%20%D7%90%D7%A8%D7%92%D7%95%D7%9F%20%D7%97%D7%95%D7%9C%D7%99%20%D7%A1%D7%A8%D7%98%D7%9F%20%D7%99%D7%A9%D7%A8%D7%90%D7%9C" rel="noopener noreferrer" target="_blank">🔍 חפש בגוגל</a></div>
+<div class="org-card">
+<div class="org-name">בית נתן</div>
+<div class="org-detail">קבוצות תמיכה לזוגות בהם אחד מבני הזוג חולה. ביקורי מתנדבות בבית ובהוספיס לחולים קשים.</div>
+<span class="age-tag">מבוגרים</span>
+<a class="org-link" href="https://www.beitnatan.com/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">עזר מציון</div>
+<div class="org-detail">תמיכה משפחתית כוללת: עידוד, ליווי ומשאבים לכל בני המשפחה.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.ami.org.il/communities/cancer-patients" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card"><div class="org-name">גדולים מהחיים — תמיכה להורים</div><div class="org-detail">מלבד הילדים, העמותה מעניקה תמיכה ישירה גם להוריהם: קבוצות הורים, ייעוץ, מידע ומיצוי זכויות — כיוון שמחלת ילד הורסת גם את חיי המשפחה הבוגרים.</div><span class="age-tag">הורים ובני משפחה</span><a class="org-link" href="https://gdolim.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div></div>
+</section>
+<!-- 13. טיפול תומך והוספיס -->
+<section class="category" id="endlife">
+<div class="cat-header">
+<div class="cat-icon">🕊️</div>
+<div>
+<div class="cat-title">טיפול תומך, פליאטיבי והוספיס</div>
+<div class="cat-count">3 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">האגודה למלחמה בסרטן — ייעוץ סוף חיים</div>
+<div class="org-detail">שירות ייעוץ בנושא טיפול תומך וסוף החיים. ביקורי מתנדבות (תכנית "תומכים") בבית ובהוספיס לחולים במצב מתקדם.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.cancer.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">בית נתן — תכנית "תומכים"</div>
+<div class="org-detail">מתנדבות בעלות הכשרה מיוחדת מעניקות סיוע ותמיכה לחולים ולמשפחות בשלב מחלה מתקדמת — ביקורים בבית ובהוספיס.</div>
+<span class="age-tag">מבוגרים</span>
+<a class="org-link" href="https://www.beitnatan.com/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">גישה לחיים</div>
+<div class="org-detail">תמיכה גם בנושא אובדן ואבל, לחולים ולמשפחותיהם.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link org-link-google" href="https://www.google.com/search?q=%D7%92%D7%99%D7%A9%D7%94%20%D7%9C%D7%97%D7%99%D7%99%D7%9D%20%D7%90%D7%A8%D7%92%D7%95%D7%9F%20%D7%97%D7%95%D7%9C%D7%99%20%D7%A1%D7%A8%D7%98%D7%9F%20%D7%99%D7%A9%D7%A8%D7%90%D7%9C" rel="noopener noreferrer" target="_blank">🔍 חפש בגוגל</a></div>
+</div>
+</section>
+<!-- 14. סרטן ספציפי -->
+<section class="category" id="specific">
+<div class="cat-header">
+<div class="cat-icon">🎗️</div>
+<div>
+<div class="cat-title">תמיכה לסוגי סרטן ספציפיים</div>
+<div class="cat-count">7 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">אחת מתשע</div>
+<div class="org-detail">העמותה היחידה בישראל שמוקדשת אך ורק לחולות סרטן השד ובני משפחותיהן. מידע, תמיכה, ייעוץ, קו חם, מתנדבות מחלימות.</div>
+<span class="specific-tag">סרטן השד</span>
+<a class="org-link" href="https://www.onein9.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">הדדי</div>
+<div class="org-detail">מרכז תמיכה בירושלים המוקדש לנשים עם סרטן השד.</div>
+<span class="specific-tag">סרטן השד</span>
+<a class="org-link org-link-google" href="https://www.google.com/search?q=%D7%94%D7%93%D7%93%D7%99%20%D7%9E%D7%A8%D7%9B%D7%96%20%D7%A1%D7%A8%D7%98%D7%9F%20%D7%A9%D7%93%20%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D" rel="noopener noreferrer" target="_blank">🔍 חפש בגוגל</a></div>
+<div class="org-card">
+<div class="org-name">אמ"ן — אגודה למיאלומה נפוצה</div>
+<div class="org-detail">קבוצות תמיכה, מפגשים חודשיים, מידע עדכני וקהילה למטופלי מיאלומה נפוצה ובני משפחותיהם. כנסים מקצועיים במרכזים רפואיים.</div>
+<span class="specific-tag">מיאלומה נפוצה</span>
+<a class="org-link" href="https://amen.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">עמותת חולי CML</div>
+<div class="org-detail">מפגשים חודשיים ופעילויות לחולי לויקמיה מילואידית כרונית.</div>
+<span class="specific-tag">CML — לויקמיה</span>
+<a class="org-link" href="http://www.cml.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">חלי"ל האור</div>
+<div class="org-detail">העמותה הגדולה בישראל המוקדשת לחולים במחלות סרטן הדם. מידע, תמיכה ועזרה לחולים ולמשפחותיהם.</div>
+<span class="specific-tag">סרטן הדם</span>
+<a class="org-link" href="https://www.halil.co.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">עמותת סרטן הערמונית (ע"ר)</div>
+<div class="org-detail">הגברת מודעות, מידע על דרכי טיפול ותמיכה לחולים חדשים ולמשפחותיהם.</div>
+<span class="specific-tag">סרטן הערמונית</span>
+<span class="age-tag">גברים</span>
+<a class="org-link org-link-google" href="https://www.google.com/search?q=%D7%A2%D7%9E%D7%95%D7%AA%D7%AA%20%D7%A1%D7%A8%D7%98%D7%9F%20%D7%94%D7%A2%D7%A8%D7%9E%D7%95%D7%A0%D7%99%D7%AA%20%D7%99%D7%A9%D7%A8%D7%90%D7%9C" rel="noopener noreferrer" target="_blank">🔍 חפש בגוגל</a></div>
+<div class="org-card">
+<div class="org-name">סרקוגיסט — סרקומה וגיסט</div>
+<div class="org-detail">מידע, תמיכה וליווי לחולי סרקומה וגיסט (GIST) ובני משפחותיהם. קו חם 24/7, ימי עיון, מפגשי תמיכה חודשיים במלון קרלטון ת"א, וכנס שנתי.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://sarcogist.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a>
+</div></div>
+</section>
+<!-- 15. מחקר -->
+<section class="category" id="research">
+<div class="cat-header">
+<div class="cat-icon">🔬</div>
+<div>
+<div class="cat-title">מחקר, פיתוח רפואי וקידום מדיניות</div>
+<div class="cat-count">1 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">האגודה למלחמה בסרטן</div>
+<div class="org-detail">מימון מחקר אונקולוגי, מימון הכשרה מקצועית לצוותים רפואיים, בניית ושיפוץ מרכזים רפואיים. מאגר המחקרים המגייסים בישראל בסרטן ילדים.</div>
+<span class="age-tag">כל הגילאים</span>
+<a class="org-link" href="https://www.cancer.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+</div>
+</section>
+</main>
+<footer>
+<p>מקורות: האגודה למלחמה בסרטן, כל-זכות, כל שירות, האגודה לזכויות החולה בישראל, ויקיפדיה, cancer-free.co.il</p>
+<p style="margin-top:6px">עודכן: 2026 | הרשימה אינה ממצה — ייתכנו ארגונים נוספים שאינם מופיעים כאן</p>
+</footer>
+</body>
+</html>

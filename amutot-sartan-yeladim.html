@@ -1,0 +1,643 @@
+﻿<!DOCTYPE html>
+
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>עמותות לחולי סרטן בישראל — לפי תחומי מענה</title>
+<style>
+  
+
+  :root {
+    --bg: #f7f5f2;
+    --surface: #ffffff;
+    --ink: #1c2129;
+    --ink-light: #4a5568;
+    --ink-muted: #8a97a8;
+    --teal: #2a7f7f;
+    --teal-light: #e6f4f4;
+    --teal-mid: #4aabab;
+    --warm: #c96b3a;
+    --warm-light: #fdf0e8;
+    --border: #e2e8ed;
+    --radius: 12px;
+    --shadow: 0 2px 16px rgba(0,0,0,0.07);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, 'Arial Hebrew', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  header {
+    background: linear-gradient(135deg, #1a5f8a, #2a7fbf 50%, #3ba8e0 100%);
+    color: white;
+    padding: 48px 32px 40px;
+    text-align: center;
+  }
+
+  header h1 {
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+
+  header p {
+    font-size: 1rem;
+    opacity: 0.85;
+    font-weight: 300;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .notice {
+    background: var(--warm-light);
+    border-right: 4px solid var(--warm);
+    padding: 12px 20px;
+    font-size: 0.85rem;
+    color: var(--ink-light);
+    text-align: center;
+  }
+
+  .toc {
+    background: var(--surface);
+    padding: 28px 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .toc h2 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--ink-muted);
+    margin-bottom: 14px;
+  }
+
+  .toc-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .toc-chip {
+    background: var(--teal-light);
+    color: var(--teal);
+    padding: 5px 13px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid #c5e6e6;
+    transition: background 0.15s;
+    cursor: pointer;
+  }
+
+  .toc-chip:hover {
+    background: var(--teal-mid);
+    color: white;
+    border-color: transparent;
+  }
+
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+  }
+
+  .category {
+    margin-bottom: 40px;
+  }
+
+  .cat-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--teal-light);
+  }
+
+  .cat-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--teal-light);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .cat-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--teal);
+  }
+
+  .cat-count {
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    font-weight: 400;
+    margin-top: 1px;
+  }
+
+  .orgs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
+
+  .org-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    box-shadow: var(--shadow);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .org-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+  }
+
+  .org-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--ink);
+    margin-bottom: 5px;
+  }
+
+  .org-detail {
+    font-size: 0.82rem;
+    color: var(--ink-light);
+    line-height: 1.5;
+  }
+
+  .age-tag {
+    display: inline-block;
+    background: #f0f4f8;
+    border: 1px solid #d4dce5;
+    color: var(--ink-muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-top: 7px;
+  }
+
+  .free-tag {
+    display: inline-block;
+    background: #edfbf4;
+    border: 1px solid #b3e8cc;
+    color: #2f8c57;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-top: 7px;
+    margin-right: 4px;
+  }
+
+  .specific-tag {
+    display: inline-block;
+    background: #fff7ed;
+    border: 1px solid #fcd6a4;
+    color: #c25e12;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-top: 7px;
+    margin-right: 4px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 28px;
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 32px 20px 28px; }
+    header h1 { font-size: 1.6rem; }
+    .orgs-grid { grid-template-columns: 1fr; }
+    main { padding: 28px 16px 50px; }
+    .toc { padding: 20px 16px; }
+  }
+
+  .org-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+    background: var(--teal);
+    color: white;
+    padding: 5px 13px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.15s, opacity 0.15s;
+  }
+  .org-link:hover { opacity: 0.85; }
+  .org-link-mail {
+    background: #6b7c93;
+  }
+
+  .org-link-google {
+    background: #4a80d4;
+  }
+  .org-link-google:hover { opacity: 0.85; }
+</style>
+</head>
+<body>
+<header>
+<h1>עמותות לחולי סרטן — ילדים ונוער</h1>
+<p>רשימה מקיפה לפי תחומי מענה — אותה עמותה עשויה להופיע במספר קטגוריות</p>
+</header>
+<div class="notice">⚠️ המידע מבוסס על נתונים מעודכנים. מומלץ לאמת פרטים ישירות מול כל עמותה לפני פנייה.</div>
+<div class="toc">
+<h2>דלג לנושא</h2>
+<div class="toc-grid"><a class="toc-chip" href="#psy">💙 ליווי נפשי וקבוצות תמיכה</a><a class="toc-chip" href="#fin">💰 סיוע כלכלי</a><a class="toc-chip" href="#edu">📚 חינוך והשלמת לימודים</a><a class="toc-chip" href="#fun">🎉 ימי כיף ופעילויות</a><a class="toc-chip" href="#vac">🏕️ חופשות ומחנות נופש</a><a class="toc-chip" href="#housing">🏠 דיור ואירוח</a><a class="toc-chip" href="#transport">🚗 הסעות לטיפולים</a><a class="toc-chip" href="#appearance">💇 פאות ומראה חיצוני</a><a class="toc-chip" href="#rehab">🏃 פעילות גופנית ושיקום</a><a class="toc-chip" href="#info">📋 מידע, זכויות וייעוץ</a><a class="toc-chip" href="#hotline">📞 קווי סיוע וליווי</a><a class="toc-chip" href="#family">👨‍👩‍👧 תמיכה לבני משפחה</a><a class="toc-chip" href="#research">🔬 מחקר ופיתוח</a></div>
+</div>
+<main>
+<!-- 1. ליווי נפשי -->
+<section class="category" id="psy">
+<div class="cat-header">
+<div class="cat-icon">💙</div>
+<div>
+<div class="cat-title">ליווי נפשי, קבוצות תמיכה ותמיכה רגשית</div>
+<div class="cat-count">2 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">זכרון מנחם</div>
+<div class="org-detail">תמיכה נפשית ורגשית לילדים, נוער וצעירים חולי סרטן ולהוריהם. חיזוק חוסן נפשי ותשוקת חיים לצד הטיפול הרפואי.</div>
+<span class="free-tag">ללא תשלום</span>
+<span class="age-tag">0–25</span>
+<a class="org-link" href="https://zichron.org/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">גדולים מהחיים</div>
+<div class="org-detail">מערך תמיכה נפשית וסוציאלית בילד החולה ובמשפחתו. גני חלומות צמודי בתי חולים לרצף חינוכי-חברתי.</div>
+<span class="age-tag">ילדים ומשפחות</span>
+<a class="org-link" href="https://gdolim.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+</div>
+</section>
+<!-- 2. סיוע כלכלי -->
+<section class="category" id="fin">
+<div class="cat-header">
+<div class="cat-icon">💰</div>
+<div>
+<div class="cat-title">סיוע כלכלי</div>
+<div class="cat-count">5 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">גדולים מהחיים — קרן בריאות</div>
+<div class="org-detail">גיוס מימון לתרופות וטיפולים ייחודיים מחוץ לסל הבריאות, כולל טיפולים ניסיוניים בארץ ובחו"ל. פעילות מול הכנסת לקידום חקיקה מיטיבה.</div>
+<span class="age-tag">ילדים</span>
+<a class="org-link" href="https://gdolim.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">עמותת חיים</div>
+<div class="org-detail">סיוע כלכלי למשפחות ילדים חולי סרטן, מימון ציוד רפואי ועזרים.</div>
+<span class="age-tag">ילדים</span>
+<a class="org-link" href="https://www.hayim.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">לתת תקווה</div>
+<div class="org-detail">סיוע כלכלי ונפשי למשפחות ילדים המתמודדים עם מחלות קשות.</div>
+<span class="age-tag">ילדים</span>
+<a class="org-link" href="https://www.latettikva.co.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">להושיט יד</div>
+<div class="org-detail">סיוע כלכלי מקיף לילדים חולי סרטן ומשפחותיהם ברחבי הארץ.</div>
+<span class="age-tag">ילדים</span>
+<a class="org-link" href="https://l-yad.org/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">עמותת זיכרון מנחם</div>
+<div class="org-detail">מענקים כספיים לפאות לילדים וסיוע בציוד. תמיכה כלכלית כחלק מהמעטפת הכוללת.</div>
+<span class="age-tag">0–25</span>
+<a class="org-link" href="https://zichron.org/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+</div>
+</section>
+<!-- 3. חינוך -->
+<section class="category" id="edu">
+<div class="cat-header">
+<div class="cat-icon">📚</div>
+<div>
+<div class="cat-title">חינוך, השלמת לימודים וחזרה לשגרה לימודית</div>
+<div class="cat-count">5 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">האגודה למלחמה בסרטן — "ניצוץ של תקווה"</div>
+<div class="org-detail">חונכים מסייעים לילדים חולי סרטן מגיל גן ועד בגרות בהשלמת חומר נלמד. גם שירות "מחשב לכל ילד" — העברת מחשבים לילדים ללא מחשב בבית.</div>
+<span class="free-tag">ללא תשלום</span>
+<span class="age-tag">ילדים ונוער</span>
+<a class="org-link" href="https://www.cancer.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">גדולים מהחיים — גני החלומות</div>
+<div class="org-detail">גנים חינוכיים-חברתיים צמודי מחלקות אונקולוגיות בבתי חולים, לרצף חינוכי מלא גם בזמן הטיפולים.</div>
+<span class="age-tag">ילדים בגיל גן</span>
+<a class="org-link" href="https://gdolim.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">זכרון מנחם</div>
+<div class="org-detail">מרכז יום חינוכי-חברתי-שיקומי, תוכניות להשלמת לימודים, חוגים וסדנאות לילדים חולים.</div>
+<span class="age-tag">0–25</span>
+<a class="org-link" href="https://zichron.org/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">לתת תקווה</div>
+<div class="org-detail">השלמת לימודים חווייתית לילדים חולים כחלק ממערך התמיכה המקיף.</div>
+<span class="age-tag">ילדים</span>
+<a class="org-link" href="https://www.latettikva.co.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">להושיט יד</div>
+<div class="org-detail">תמיכה לימודית לילדים חולי סרטן ואחיהם, אשר אורח חייהם נפגע עקב תקופת הטיפול.</div>
+<span class="age-tag">ילדים</span>
+<a class="org-link" href="https://l-yad.org/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+</div>
+</section>
+<!-- 4. ימי כיף -->
+<section class="category" id="fun">
+<div class="cat-header">
+<div class="cat-icon">🎉</div>
+<div>
+<div class="cat-title">ימי כיף, פעילויות בידור ואירועים</div>
+<div class="cat-count">8 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">זכרון מנחם</div>
+<div class="org-detail">פעילויות שמחה במחלקות בתי החולים, ימי כיף וחוגים לילדים מאושפזים. מתנדבים מגיעים ישירות למחלקות האונקולוגיות.</div>
+<span class="age-tag">0–25</span>
+<a class="org-link" href="https://zichron.org/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">לתת תקווה</div>
+<div class="org-detail">פעילויות שמחה בבתי חולים, ליווי אישי ומפגשי הגשמת משאלות לילדים חולים.</div>
+<span class="age-tag">ילדים</span>
+<a class="org-link" href="https://www.latettikva.co.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">המעגל של ג'רמי (Jeremy's Circle)</div>
+<div class="org-detail">ימי כיף ופעילויות מגוונות לילדים הגדלים במשפחות המתמודדות עם סרטן, כולל הסעות לאירועים.</div>
+<span class="free-tag">ללא תשלום</span>
+<span class="age-tag">ילדים</span>
+<a class="org-link" href="http://www.jeremyscircle.org/he_IL/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">להושיט יד</div>
+<div class="org-detail">ימי כיף, טיולים, סדנאות יצירה ופעילויות העשרה לילדים חולים ומשפחותיהם.</div>
+<span class="age-tag">ילדים</span>
+<a class="org-link" href="https://l-yad.org/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">גדולים מהחיים</div>
+<div class="org-detail">חוויות משמחות ופעילויות מיוחדות לילדים חולי סרטן ומשפחותיהם כחלק ממשימת "השמחה" של העמותה.</div>
+<span class="age-tag">ילדים</span>
+<a class="org-link" href="https://gdolim.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">סאנרייז ישראל</div>
+<div class="org-detail">פעילות פנאי דו-שבועית ישירות במחלקות האונקולוגיות לילדים בבתי החולים רמב"ם וסורוקה. קייטנות יום בחופשות האביב והקיץ לילדים חולי סרטן מכל המגזרים — ללא עלות למשפחות.</div>
+<span class="free-tag">ללא תשלום</span><span class="age-tag">ילדים</span>
+<a class="org-link" href="https://www.google.com/search?q=סאנרייז+ישראל+עמותה+ילדים+סרטן" rel="noopener noreferrer" target="_blank">🔗 חפש בגוגל</a>
+</div><div class="org-card">
+<div class="org-name">משאלת לב</div>
+<div class="org-detail">הגשמת משאלות לילדים החולים במחלות מסכנות חיים. ה-Wish Challenge — סדנאות לחברות המאפשרות לעובדים לעצב ולהגשים משאלה של ילד חולה. פועלות ברחבי הארץ.</div>
+<span class="age-tag">ילדים</span>
+<a class="org-link" href="https://www.google.com/search?q=עמותת+משאלת+לב+ישראל" rel="noopener noreferrer" target="_blank">🔗 חפש בגוגל</a>
+</div><div class="org-card">
+<div class="org-name">חסדי יאיר</div>
+<div class="org-detail">מתנדבים המגיעים למחלקות האונקולוגיות לילדים ומשמחים את הילדים המאושפזים ואת משפחותיהם בפעילויות שמחה ומתנות.</div>
+<span class="free-tag">ללא תשלום</span><span class="age-tag">ילדים</span>
+<a class="org-link" href="https://www.google.com/search?q=חסדי+יאיר+ילדים+חולי+סרטן" rel="noopener noreferrer" target="_blank">🔗 חפש בגוגל</a>
+</div></div>
+</section>
+<!-- 5. חופשות ונופש -->
+<section class="category" id="vac">
+<div class="cat-header">
+<div class="cat-icon">🏕️</div>
+<div>
+<div class="cat-title">חופשות, מחנות נופש ונסיעות</div>
+<div class="cat-count">7 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">האגודה למלחמה בסרטן — כפר ילדים אורלנדו</div>
+<div class="org-detail">שליחת ילדים במצב מחלה מתקדם ומשפחותיהם לחופשה שנתית בכפר הילדים באורלנדו, ארה"ב.</div>
+<span class="age-tag">ילדים</span>
+<a class="org-link" href="https://www.cancer.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">להושיט יד — "טיול החלומות" לאורלנדו</div>
+<div class="org-detail">ילדים חולי סרטן ומשפחותיהם יוצאים לטיול חלומות שנתי, לרוב לאורלנדו.</div>
+<span class="age-tag">ילדים</span>
+<a class="org-link" href="https://l-yad.org/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">זכרון מנחם — מחנות נופש</div>
+<div class="org-detail">מחנות נופש שנתיים בחופשות החורף, האביב והקיץ. ילדים מוזמנים מ-12 בתי חולים בארץ. גם מחנות למבוגרים צעירים בגילאי 20–30.</div>
+<span class="age-tag">0–25</span>
+<a class="org-link" href="https://zichron.org/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">לתת תקווה</div>
+<div class="org-detail">מחנות נופש והבראה לילדים חולים כחלק ממערך התמיכה הכולל.</div>
+<span class="age-tag">ילדים</span>
+<a class="org-link" href="https://www.latettikva.co.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">זיכרון מנחם — חופשות משפחתיות</div>
+<div class="org-detail">חופשות משפחתיות וימי כיף לילדים חולים ומשפחותיהם.</div>
+<span class="age-tag">0–25</span>
+<a class="org-link" href="https://zichron.org/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card"><div class="org-name">עזר מציון — מחנה קיץ לילדים</div><div class="org-detail">מחנה קיץ שנתי לילדים חולי סרטן ומשפחותיהם — לינה, אוכל, פעילויות ומתנדבים מסורים. מתקיים בבתי מלון ובכפרי נופש ברחבי הארץ, בליווי צוות רפואי.</div><span class="free-tag">ללא תשלום</span><span class="age-tag">ילדים ומשפחות</span><a class="org-link" href="https://www.ami.org.il/services/summer-camp-for-cancer-patients" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div><div class="org-card"><div class="org-name">רפא נא — נופש למשפחות עם ילדים</div><div class="org-detail">נופש חינם גם למשפחות עם ילדים חולי סרטן — יום או יומיים בצימרים ומלונות שתרמו מקום פנוי. זכאות: מי שבטיפול אונקולוגי כיום, בכל גיל.</div><span class="free-tag">ללא תשלום</span><span class="age-tag">ילדים ומשפחות</span><a class="org-link" href="https://www.refanah.org/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div></div>
+</section>
+<!-- 6. דיור ואירוח -->
+<section class="category" id="housing">
+<div class="cat-header">
+<div class="cat-icon">🏠</div>
+<div>
+<div class="cat-title">דיור ואירוח ליד בית חולים</div>
+<div class="cat-count">3 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">גדולים מהחיים — מלונית למשפחות</div>
+<div class="org-detail">מלונית למשפחות של ילדים חולי סרטן המטופלים במחלקה האונקולוגית — לינה, אוכל ופעילויות.</div>
+<span class="age-tag">משפחות ילדים חולים</span>
+<a class="org-link" href="https://gdolim.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">זיכרון מנחם — מרכז אירוח</div>
+<div class="org-detail">מרכז אירוח למשפחות ילדים חולי סרטן. שהייה נוחה לצד בית החולים.</div>
+<span class="age-tag">0–25 ומשפחות</span>
+<a class="org-link" href="https://zichron.org/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">מלונית לב ח"ש</div>
+<div class="org-detail">מלונית למשפחות של ילדים חולי סרטן המאושפזים במחלקה האונקולוגית — לינה, אוכל ופעילויות. כולל תכנית "נשארים בעניינים" — תמיכה לימודית, רגשית וחברתית לאחים הגדלים בצל המחלה.</div>
+<span class="age-tag">ילדים ומשפחות</span>
+<a class="org-link" href="https://www.google.com/search?q=מלונית+לב+חש+ילדים+סרטן" rel="noopener noreferrer" target="_blank">🔗 חפש בגוגל</a>
+</div></div>
+</section>
+<!-- 7. הסעות -->
+<section class="category" id="transport">
+<div class="cat-header">
+<div class="cat-icon">🚗</div>
+<div>
+<div class="cat-title">הסעות לטיפולים ולוגיסטיקה</div>
+<div class="cat-count">1 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">המעגל של ג'רמי</div>
+<div class="org-detail">הסעות משפחות לאירועי תמיכה ופעילויות.</div>
+<span class="age-tag">ילדים ומשפחות</span>
+<a class="org-link" href="http://www.jeremyscircle.org/he_IL/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+</div>
+</section>
+<!-- 8. פאות וטיפוח -->
+<section class="category" id="appearance">
+<div class="cat-header">
+<div class="cat-icon">💇</div>
+<div>
+<div class="cat-title">פאות, מראה חיצוני וטיפוח</div>
+<div class="cat-count">1 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">זיכרון מנחם</div>
+<div class="org-detail">מענקים לפאות לילדים ונוער חולי סרטן.</div>
+<span class="age-tag">0–25</span>
+<a class="org-link" href="https://zichron.org/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+</div>
+</section>
+<!-- 9. שיקום גופני -->
+<section class="category" id="rehab">
+<div class="cat-header">
+<div class="cat-icon">🏃</div>
+<div>
+<div class="cat-title">פעילות גופנית, שיקום ובריאות הגוף</div>
+<div class="cat-count">1 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">האגודה למלחמה בסרטן — שיקום נוירו-פסיכולוגי</div>
+<div class="org-detail">שיקום והשילוב של ילדים מחלימים מגידולי מוח בחזרה לשגרת חיים במשפחה, בבית הספר ובחברה.</div>
+<span class="age-tag">ילדים</span>
+<a class="org-link" href="https://www.cancer.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+</div>
+</section>
+<!-- 10. מידע וזכויות -->
+<section class="category" id="info">
+<div class="cat-header">
+<div class="cat-icon">📋</div>
+<div>
+<div class="cat-title">מידע, זכויות, ייעוץ משפטי ומס</div>
+<div class="cat-count">3 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">גדולים מהחיים</div>
+<div class="org-detail">מיצוי זכויות לילדים חולי סרטן ומשפחותיהם. פעילות מול הכנסת לחקיקה: חינוך, בריאות, ביטחון תעסוקתי להורים.</div>
+<span class="age-tag">ילדים</span>
+<a class="org-link" href="https://gdolim.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">הרב פירר — עזרא למרפא</div>
+<div class="org-detail">ייעוץ רפואי אישי ומקצועי חינם: ניתוח המסמכים הרפואיים ופנייה לבכירי הרופאים בארץ ובחו"ל. גם: הסעות אמבולנס, השאלת ציוד רפואי, הטסת חולים, יבוא תרופות נדירות, ו"קיץ של חיוכים" — ימי קיץ לחולי סרטן. פועלת מ-1979. חתן פרס ישראל.</div>
+<div class="org-detail" style="margin-top:6px;font-size:0.8rem;color:var(--ink-muted)">📞 03-5777001 (א׳–ה׳ 9:30–10:00)</div><span class="free-tag">ללא תשלום</span><span class="age-tag">כל הגילאים</span><a class="org-link" href="https://www.ezra-lemarpe.org/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a>
+</div><div class="org-card">
+<div class="org-name">הרב פישר — מגן לחולה</div>
+<div class="org-detail">ייעוץ רפואי חינם מהרב בנימין פישר, מוותיקי היועצים הרפואיים בישראל. קיצור זמני המתנה לבדיקות, הכוונה לרופאים המתאימים, השאלת ציוד רפואי, שינוע חולים לטיפולים, הטסת חולים לחו"ל. פועלת מ-1994.</div>
+<div class="org-detail" style="margin-top:6px;font-size:0.8rem;color:var(--ink-muted)">📞 WhatsApp: 02-644-2000</div><span class="free-tag">ללא תשלום</span><span class="age-tag">כל הגילאים</span><a class="org-link" href="https://magen.org/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a>
+</div></div>
+</section>
+<!-- 11. קווי סיוע -->
+<section class="category" id="hotline">
+<div class="cat-header">
+<div class="cat-icon">📞</div>
+<div>
+<div class="cat-title">קווי סיוע, ייעוץ טלפוני ולוויי מתנדבות</div>
+<div class="cat-count">1 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">גדולים מהחיים — קו סיוע</div>
+<div class="org-detail">קו סיוע ייעודי לילדים חולי סרטן ומשפחותיהם, כולל בצל מצבי חירום.</div>
+<span class="age-tag">ילדים</span>
+<a class="org-link" href="https://gdolim.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+</div>
+</section>
+<!-- 12. בני משפחה -->
+<section class="category" id="family">
+<div class="cat-header">
+<div class="cat-icon">👨‍👩‍👧</div>
+<div>
+<div class="cat-title">תמיכה לבני משפחה ולמטפלים</div>
+<div class="cat-count">4 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">המעגל של ג'רמי</div>
+<div class="org-detail">תמיכה ספציפית לילדים הגדלים במשפחות בהן הורה חולה בסרטן.</div>
+<span class="age-tag">ילדים</span>
+<a class="org-link" href="http://www.jeremyscircle.org/he_IL/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">זכרון מנחם</div>
+<div class="org-detail">תמיכה הוליסטית להורים ובני משפחה של ילדים חולים. מרכז אירוח למשפחות.</div>
+<span class="age-tag">משפחות 0–25</span>
+<a class="org-link" href="https://zichron.org/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card"><div class="org-name">יד תמר</div><div class="org-detail">מעטפת הוליסטית לכל המשפחה שחווה סרטן — ילדים, הורים ובני זוג. ליווי רגשי, מיצוי זכויות ורשת בטחון לכל בני הבית לאורך המסע.</div><span class="age-tag">כל הגילאים</span><a class="org-link" href="https://yadtamar.org.il/he/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div><div class="org-card"><div class="org-name">גישה לחיים</div><div class="org-detail">תמיכה לחולים ולבני משפחותיהם בכל הגילאים — כולל ילדים שהורה חולה בסרטן. תוכניות, סדנאות וליווי במצבי חולי ואובדן בירושלים, השרון, זכרון יעקב וצפון.</div><span class="age-tag">כל הגילאים כולל ילדים</span><a class="org-link org-link-google" href="https://www.google.com/search?q=גישה+לחיים" rel="noopener noreferrer" target="_blank">🔍 חפש בגוגל</a></div></div>
+</section>
+<!-- 13. טיפול תומך והוספיס -->
+<!-- 14. סרטן ספציפי -->
+<!-- 15. מחקר -->
+<section class="category" id="research">
+<div class="cat-header">
+<div class="cat-icon">🔬</div>
+<div>
+<div class="cat-title">מחקר, פיתוח רפואי וקידום מדיניות</div>
+<div class="cat-count">3 ארגונים</div>
+</div>
+</div>
+<div class="orgs-grid">
+<div class="org-card">
+<div class="org-name">עמותת חיים</div>
+<div class="org-detail">עמותת הבכורה בישראל לילדי סרטן (1984). מימון מחקר ופיתוח בהמטו-אונקולוגיה ילדים, קידום שיפור הטיפול הרפואי.</div>
+<span class="age-tag">ילדים</span>
+<a class="org-link" href="https://www.hayim.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">גדולים מהחיים</div>
+<div class="org-detail">פעילות מול הכנסת לשינוי חוקתי וקידום מדיניות: סל בריאות, חינוך, בטחון תעסוקתי להורים. מסדרונות הכנסת והממשלה.</div>
+<span class="age-tag">ילדים</span>
+<a class="org-link" href="https://gdolim.org.il/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+<div class="org-card">
+<div class="org-name">זכרון מנחם — גיוס תורמי דם</div>
+<div class="org-detail">מערכת ייחודית לגיוס תורמי דם ורכיבי דם עבור ילדים חולי סרטן: גיוס מראש, בדיקת סוג דם, התאמה מדויקת ומהירה.</div>
+<span class="age-tag">0–25</span>
+<a class="org-link" href="https://zichron.org/" rel="noopener noreferrer" target="_blank">🔗 לאתר העמותה</a></div>
+</div>
+</section>
+</main>
+<footer>
+<p>מקורות: האגודה למלחמה בסרטן, כל-זכות, כל שירות, האגודה לזכויות החולה בישראל, ויקיפדיה, cancer-free.co.il</p>
+<p style="margin-top:6px">עודכן: 2026 | הרשימה אינה ממצה — ייתכנו ארגונים נוספים שאינם מופיעים כאן</p>
+</footer>
+</body>
+</html>
